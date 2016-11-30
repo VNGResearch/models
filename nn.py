@@ -1,12 +1,13 @@
+from __future__ import absolute_import
 from __future__ import division
+from __future__ import print_function
 
 import math
 import tensorflow as tf
 
 class NeuralNetwork(object):
     def __init__(self, config):
-        self.full_config = config
-        self.config = config['learning_model']['NeuralNetwork']
+        self.config = config
 
         self.layer_description = self.config['layer_description']
         self.hidden_layers_desc = self.layer_description[1:]
@@ -17,12 +18,12 @@ class NeuralNetwork(object):
     def inference(self, input_holder):
         last_layer = input_holder
         last_size = self.input_size 
-        print '---Build NN, layer: input', last_size
+        print('---Build NN, layer: input', last_size)
 
         for layer in self.hidden_layers_desc:
             layer_name = layer['name']
             layer_size = layer['unit_size']
-            print '---Build NN, layer:', layer_name, layer_size
+            print('---Build NN, layer:', layer_name, layer_size)
             with tf.name_scope(layer_name):
                 weights = tf.Variable(tf.truncated_normal([last_size, layer_size], stddev=1.0/math.sqrt(float(last_size))), name='weights')
                 biases = tf.Variable(tf.zeros([layer_size], name='biases'))
