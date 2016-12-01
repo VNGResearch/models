@@ -35,12 +35,12 @@ data_sets = input_provider.read_data_sets('../data/mnist/')
 nn_model = NN(nn_des) 
 
 def fill_feed_dict(data_set, X_pl, Y_pl):
-	images_feed, labels_feed = data_set.next_batch(batch_size)
-	feed_dict = {
-		X_pl: images_feed,
-		Y_pl: labels_feed,
-	}
-	return feed_dict
+    images_feed, labels_feed = data_set.next_batch(batch_size)
+    feed_dict = {
+        X_pl: images_feed,
+        Y_pl: labels_feed,
+    }
+    return feed_dict
 
 def evaluate(sess, eval_op, X_pl, Y_pl, dataset):
 	true_count = 0.0
