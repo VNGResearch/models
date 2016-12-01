@@ -31,7 +31,7 @@ nn_des = {'layer_description':[
 			],
 		}
 
-data_sets = input_provider.read_data_sets('../data/mnist/')
+data_sets = input_provider.read_data_sets('../../data/mnist/')
 nn_model = NN(nn_des) 
 
 def fill_feed_dict(data_set, X_pl, Y_pl):
