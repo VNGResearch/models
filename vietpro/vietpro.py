@@ -10,6 +10,7 @@ import sys
 import network
 from vec4net import make_vec
 import numpy as np
+import re
 
 # Replace this with your model's result
 JSON = os.path.join(path, 'params.net')
@@ -60,3 +61,19 @@ def tokenize(txt):
     token_list = txt.lower().split()
     iob_list = _classify(token_list)
     return _make_words(words, iob_list)
+
+def standardize(text):
+    #norm_text = text.lower()
+
+    # Replace xxx with spaces
+    norm_text = text.replace('\n', ' ')
+
+    # Pad punctuation with spaces on both sides
+    for char in ['.', '"', ',', '(', ')', '!', '?', ';', ':', '\'s']:
+        norm_text = norm_text.replace(char, ' ' + char + ' ')
+
+    return re.sub(' +', ' ', norm_text)    
+
+def filter_stopwords(tokens):
+	stopwords = open(os.path.join(path, 'stopwords_list_uy.txt')).read().split('\n')
+	return [token for token in tokens if token not in stopwords]

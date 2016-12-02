@@ -1,7 +1,7 @@
 import sys
 sys.path.append('../')
 
-import vietseg
+import vietpro
 
 text = '''Chủ nhân website muốn duy trì domain .com phải trả 6,42 USD ( tăng 7 % ) , còn .net sẽ tốn 3,85 USD ( tăng 10 % ) mỗi năm . 
 Hãng điều hành tên miền VeriSign sẽ thu thêm 29 triệu USD/năm từ 62 triệu trang .com và 9,1 triệu trang .net .
@@ -16,4 +16,11 @@ T. H. ( theo AP ) T. H. Nhân'''
 
 print('INPUT text:\n', text)
 print('-'*80)
-print('OUPUT text:\n', vietseg.tokenize(text))
+text = vietpro.standardize(text)
+print('STAND text:\n', text)
+print('-'*80)
+token = vietpro.tokenize(text)
+print('TOKEN text:\n', token)
+print('-'*80)
+token = vietpro.filter_stopwords(token)
+print('TOKEN text:\n', token)
