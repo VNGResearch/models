@@ -3,10 +3,10 @@
 # Model application
 ###############################################################################
 
-import os
+import os, sys
 path = os.path.dirname(__file__)
+sys.path.append(path)
 
-import sys
 import network
 from vec4net import make_vec
 import numpy as np
@@ -75,5 +75,5 @@ def standardize(text):
     return re.sub(' +', ' ', norm_text)    
 
 def filter_stopwords(tokens):
-	stopwords = open(os.path.join(path, 'stopwords_list_uy.txt')).read().split('\n')
+	stopwords = set(open(os.path.join(path, 'stopwords_list_uy.txt')).read().split('\n'))
 	return [token for token in tokens if token not in stopwords]
