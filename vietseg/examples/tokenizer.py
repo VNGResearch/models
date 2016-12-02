@@ -1,4 +1,9 @@
-Chủ nhân website muốn duy trì domain .com phải trả 6,42 USD ( tăng 7 % ) , còn .net sẽ tốn 3,85 USD ( tăng 10 % ) mỗi năm .
+import sys
+sys.path.append('../')
+
+import vietseg
+
+text = '''Chủ nhân website muốn duy trì domain .com phải trả 6,42 USD ( tăng 7 % ) , còn .net sẽ tốn 3,85 USD ( tăng 10 % ) mỗi năm . 
 Hãng điều hành tên miền VeriSign sẽ thu thêm 29 triệu USD/năm từ 62 triệu trang .com và 9,1 triệu trang .net .
 Sự thay đổi này sẽ bắt đầu vào ngày 15/10 năm nay và chỉ áp dụng với tên đăng ký mới hoặc gia hạn .
 Những tên miền đã đóng phí duy trì 10 năm hay 100 năm vẫn theo giá cũ .
@@ -7,4 +12,8 @@ Hiện , máy chủ DNS của họ nhận 30 tỷ yêu cầu mỗi ngày , gấp
 VeriSign phải khởi động dự án mang tên Titan để mở rộng dung lượng của hệ thống , đáp ứng được 4 nghìn tỷ thắc mắc/ngày vào năm 2010 .
 Tăng dung lượng máy chủ cũng là một biện pháp đối phó với nguy cơ tấn công từ chối dịch vụ .
 Nếu để xảy ra tình trạng này , toàn bộ các trang mà VeriSign quản lý sẽ `` chết đứng '' .
-T. H. ( theo AP ) T. H. Nhân
+T. H. ( theo AP ) T. H. Nhân'''
+
+print('INPUT text:\n', text)
+print('-'*80)
+print('OUPUT text:\n', vietseg.tokenize(text))

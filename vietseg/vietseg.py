@@ -3,14 +3,16 @@
 # Model application
 ###############################################################################
 
-import sys
 import os
+path = os.path.dirname(__file__)
+
+import sys
 import network
 from vec4net import make_vec
 import numpy as np
 
 # Replace this with your model's result
-JSON = './params.net'
+JSON = os.path.join(path, 'params.net')
 net = network.load(JSON)
 
 
@@ -53,42 +55,8 @@ def _make_words(token_list, iob_list):
     if t: tokens.append(t)
     return ['_'.join(tok) for tok in tokens]
 
-def _test():
-    tok = ['chủ', 'nhân', 'website', 'muốn', 'duy', 'trì', 'domain', '.com', 'phải', 'trả', '6,42', 'usd', '(', 'tăng', '7', '%', ')', ',', 'còn', '.net', 'sẽ', 'tốn', '3,85', 'usd', '(', 'tăng', '10', '%', ')', 'mỗi', 'năm', '.']
-    iob = ['b', 'i', 'b', 'b', 'b', 'i', 'b', 'b', 'b', 'b', 'b', 'b', 'o', 'b', 'b', 'o', 'o', 'o', 'b', 'b', 'b', 'b', 'b', 'b', 'o', 'b', 'b', 'o', 'o', 'b', 'b', 'o']
-    return _make_words(tok, iob)
-
-if __name__ == '__main__':
-    n_args = len(sys.argv)
-    if n_args < 3:
-        print("""
-              VietSeg - Ver. 0.0.1
-              ==================================
-              Usage: python3 vietseg.py <input file> <output file>
-               * The <input file> must be in UTF-8 encoding.
-               * The segmented text will be written in the <output file>.
-              ==================================
-              http://github.com/manhtai/vietseg
-              """)
-        exit(1)
-    else:
-        input_file = sys.argv[1]
-        output_file = sys.argv[2]
-    if not os.path.isfile(input_file):
-        print('Input text file "' + input_file+ '" does not exist.')
-        exit(1)
-    with open(input_file, 'r') as fi, open(output_file, 'w') as fo:
-        for line in fi:
-            in_line = line.split()
-            if not in_line:
-                fo.write(line)
-                continue
-            token_list = line.lower().split()
-            iob_list = _classify(token_list)
-            out_line = _make_words(in_line, iob_list)
-            fo.write(' '.join(out_line)+'\n')
-
-
-
-
-
+def tokenize(txt):
+    words = txt.split()
+    token_list = txt.lower().split()
+    iob_list = _classify(token_list)
+    return _make_words(words, iob_list)

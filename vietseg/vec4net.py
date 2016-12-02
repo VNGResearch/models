@@ -3,11 +3,14 @@
 # Convert word to vector
 ###############################################################################
 
+import os
+path = os.path.dirname(__file__)
+
 import numpy as np
 from gensim.models import Word2Vec
 
 # Load Word2Vec model from file, use your model's result or use mine
-MODEL = Word2Vec.load('./features.vec')
+MODEL = Word2Vec.load(os.path.join(path, 'features.vec'))
 WINDOW = 7
 SHAPE = MODEL.syn0.shape[1]
 
