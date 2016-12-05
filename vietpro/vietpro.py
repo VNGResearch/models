@@ -69,7 +69,7 @@ def standardize(text):
     norm_text = text.replace('\n', ' ')
 
     # Pad punctuation with spaces on both sides
-    for char in ['.', '"', ',', '(', ')', '!', '?', ';', ':', '\'s']:
+    for char in ['.', '"', ',', '(', ')', '!', '?', ';', ':', '\'s', '\'']:
         norm_text = norm_text.replace(char, ' ' + char + ' ')
 
     return re.sub(' +', ' ', norm_text)    
